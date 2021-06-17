@@ -24,21 +24,53 @@ class _CounterPageState extends State<CounterPage>{
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('Numero de clicks',style: _estiloTexto),
-            Text(_count.toString())
+            Text(_count.toString(),style: _estiloTexto)
           ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          print('hola');
-          
-          setState(() {
-            _count ++;
-          });
-        },
-        child: Icon(Icons.add),
-      ),
+      floatingActionButton: _createButtons(),
     );
+  }
+
+  Widget _createButtons(){
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        FloatingActionButton(
+          onPressed: _aumentar,
+          child: Icon(Icons.add),
+        ),
+        FloatingActionButton(
+          onPressed: _restar,
+          child: Icon(Icons.remove),
+        ),
+        FloatingActionButton(
+          onPressed: _reset,
+          child: Text('0'),
+        ),
+      ],
+    );
+  }
+
+  void _aumentar(){
+    print('aumento');
+    setState(() {
+      _count ++;
+    });
+  }
+
+  void _restar(){
+    print('resto');
+    setState(() {
+      _count --;
+    });
+  }
+
+  void _reset(){
+    print('reseteo');
+    setState(() {
+      _count = 0;
+    });
   }
 }
